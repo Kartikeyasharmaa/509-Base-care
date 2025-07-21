@@ -27,7 +27,9 @@ const WorkerLogin = () => {
       localStorage.setItem("user", JSON.stringify(user));
 
       alert("✅ Login successful!");
-      navigate("/worker/dashboard");
+
+      // ✅ Navigate to dashboard and remove login from history
+      navigate("/worker/dashboard", { replace: true });
     } catch (err: any) {
       alert(err.response?.data?.message || "Login failed");
     }

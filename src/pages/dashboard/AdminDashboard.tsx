@@ -4,10 +4,28 @@ import { useNavigate } from "react-router-dom";
 import api from "@/lib/api";
 import Header from "@/components/Header";
 
+type Report = {
+  id: number;
+  description: string;
+  location: string;
+  category?: string;
+  landmark?: string;
+  urgency?: string;
+  workername?: string;
+  created_at: string;
+  status: string;
+};
+
+type Worker = {
+  id: number;
+  name: string;
+  email: string;
+};
+
 const AdminDashboard = () => {
-  const [reports, setReports] = useState<any[]>([]);
-  const [filteredReports, setFilteredReports] = useState<any[]>([]);
-  const [workers, setWorkers] = useState<any[]>([]);
+  const [reports, setReports] = useState<Report[]>([]);
+  const [filteredReports, setFilteredReports] = useState<Report[]>([]);
+  const [workers, setWorkers] = useState<Worker[]>([]);
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -72,7 +90,7 @@ const AdminDashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    navigate("/login/admin", { replace: true }); // ✅ Prevents back button return
+    navigate("/login/admin", { replace: true }); // ✅ Prevents going back to dashboard
   };
 
   useEffect(() => {
@@ -85,6 +103,7 @@ const AdminDashboard = () => {
 
   return (
     <>
+      {/* ✅ Header with logout support */}
       <Header onLogout={handleLogout} />
 
       <div className="min-h-screen bg-[url('/heroimage.jpg')] bg-cover bg-center bg-no-repeat">

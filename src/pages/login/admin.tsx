@@ -28,7 +28,9 @@ const AdminLogin = () => {
       localStorage.setItem("user", JSON.stringify(user));
 
       alert("✅ Admin login successful!");
-      navigate("/admin/dashboard");
+
+      // ✅ Replace login page in history
+      navigate("/admin/dashboard", { replace: true });
     } catch (err: any) {
       alert(err.response?.data?.message || "Login failed. Try again.");
     }
